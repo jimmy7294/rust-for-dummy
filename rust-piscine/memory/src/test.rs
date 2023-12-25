@@ -38,4 +38,43 @@ mod tests {
         assert_eq!(split_at("You can do an awful lot by writing down what happened to you and thinking it through", 10), ("You can do", " an awful lot by writing down what happened to you and thinking it through"));
         assert_eq!(find("You can do an awful lot by writing down what happened to you and thinking it through", 'w'), 15);
     }
+
+    use crate::name_initials::*;
+    // Define Test struc
+    struct Test {
+        names: Vec<&'static str>,
+        result: Vec<&'static str>,
+    }
+    #[test]
+    fn test_name_initials() {
+        let cases = vec![
+            Test {
+                names: vec![
+                    "Roger Federer",
+                    "Rafael Nadal",
+                    "Novak Djokovic",
+                    "Carlos Alcaraz",
+                    "Janik Sinner",
+                ],
+                result: vec!["R. F.", "R. N.", "N. D.", "C. A.", "J. S."],
+            },
+            Test {
+                names: vec![
+                    "Chris Hemsworth",
+                    "Cris Evans",
+                    "Robert Downey",
+                    "Mark Ruffalo",
+                    "Scarlett Johansson",
+                    "Jeremy Renners",
+                    "Sofia Reyes",
+                ],
+                result: vec![
+                    "C. H.", "C. E.", "R. D.", "M. R.", "S. J.", "J. R.", "S. R.",
+                ],
+            },
+        ];
+        for case in cases {
+            assert_eq!(initials(case.names), case.result);
+        }
+    }
 }

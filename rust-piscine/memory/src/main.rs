@@ -7,6 +7,8 @@ mod to_url;
 use to_url::*;
 mod string_literals;
 use string_literals::*;
+mod name_initials;
+use name_initials::*;
 
 fn main() {
     // borrow.rs
@@ -54,5 +56,18 @@ fn main() {
         )
     );
     println!("{}", find("Rust is tough", 'z'));
-    println!("\x1b[1;33mEnd of string_literals.rs\x1b[0m\n")
+    println!("\x1b[1;33mEnd of string_literals.rs\x1b[0m\n");
+
+    // name_initials.rs
+    println!("\x1b[1;32mname_initials.rs\x1b[0m");
+    let names = vec!["Jordan Peterson", "Carl Jung", "Marcus Aurelius", "M. W."];
+    for name in names.clone() {
+        println!("{} -> {}", name, name_initials(name))
+    }
+    println!("{:?}", initials(names));
+    // expectect output: ["J. P.", "C. J.", "M. A.", "M. W."]
+
+    let names = vec!["Harry Potter", "Someone Else", "J. L.", "Barack Obama"];
+    println!("{:?}", initials(names));
+    println!("\x1b[1;32mEnd of name_initials.rs\x1b[0m\n");
 }

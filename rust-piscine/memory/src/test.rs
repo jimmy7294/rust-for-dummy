@@ -110,4 +110,98 @@ mod tests {
             assert_eq!(first_subword(case.s), case.result.to_string());
         }
     }
+
+    // copy.rs
+    use crate::copy::*;
+    #[test]
+    fn test_copy_nbr_function() {
+        struct TestNbr {
+            n: i32,
+            result: (i32, f64, f64),
+        }
+        let nbr_cases = vec![
+            TestNbr {
+                n: 0,
+                result: (0, 1.0, f64::NEG_INFINITY),
+            },
+            TestNbr {
+                n: 1,
+                result: (1, 2.718281828459045, 0.0),
+            },
+            TestNbr {
+                n: 2,
+                result: (2, 2.0_f64.exp(), 2.0_f64.ln()),
+            },
+            TestNbr {
+                n: -1,
+                result: (-1, (-1.0_f64).exp(), 1.0_f64.ln()),
+            },
+            TestNbr {
+                n: -100,
+                result: (-100, (-100.0_f64).exp(), 100.0_f64.ln()),
+            },
+        ];
+        for nbr_case in nbr_cases {
+            assert_eq!(nbr_function(nbr_case.n), nbr_case.result);
+        }
+    }
+    #[test]
+    fn test_copy_str_function() {
+        struct TestStr {
+            s: String,
+            res: (String, String),
+        }
+
+        let str_cases = vec![
+            TestStr {
+                s: "1 2 3 4 5".to_string(),
+                res: ("1 2 3 4 5".to_string(), "2.718281828459045 7.38905609893065 20.085536923187668 54.598150033144236 148.4131591025766".to_string()),
+            },
+            TestStr {
+                s: "1 0 4".to_string(),
+                res: ("1 0 4".to_string(), "2.718281828459045 1 54.598150033144236".to_string()),
+            },
+        ];
+
+        for str_case in str_cases {
+            assert_eq!(str_function(str_case.s), str_case.res);
+        }
+    }
+
+    #[test]
+    fn test_copy_vec_function() {
+        fn create_test_case(v: Vec<i32>, res: (Vec<i32>, Vec<f64>)) -> TestVec {
+            TestVec {
+                // Test instance
+                v,   //input
+                res, //expected output
+            }
+        }
+        struct TestVec {
+            v: Vec<i32>,
+            res: (Vec<i32>, Vec<f64>),
+        }
+
+        let vec_cases = vec![
+            create_test_case(
+                [0, 1].to_vec(),
+                ([0, 1].to_vec(), [f64::NEG_INFINITY, 1.0_f64.ln()].to_vec()),
+            ),
+            create_test_case(
+                [2, 4].to_vec(),
+                ([2, 4].to_vec(), [2.0_f64.ln(), 4.0_f64.ln()].to_vec()),
+            ),
+            create_test_case(
+                [5, 7].to_vec(),
+                ([5, 7].to_vec(), [5.0_f64.ln(), 7.0_f64.ln()].to_vec()),
+            ),
+            create_test_case(
+                [-1, -2].to_vec(),
+                ([-1, -2].to_vec(), [(1.0_f64).ln(), (2.0_f64.ln())].to_vec()),
+            ),
+        ];
+        for vec_case in vec_cases {
+            assert_eq!(vec_function(vec_case.v), vec_case.res);
+        }
+    }
 }

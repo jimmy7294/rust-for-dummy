@@ -11,6 +11,8 @@ mod name_initials;
 use name_initials::*;
 mod ownership;
 use ownership::*;
+mod copy;
+use copy::*;
 
 fn main() {
     // borrow.rs
@@ -85,4 +87,16 @@ fn main() {
     println!("first_subword({}) = {}", s3.clone(), first_subword(s3));
     println!("first_subword({}) = {}", s4.clone(), first_subword(s4));
     println!("\x1b[1;31mEnd of ownership.rs\x1b[0m\n");
+
+    // copy.rs
+    println!("\x1b[1;32mcopy.rs\x1b[0m");
+    let a: i32 = 0;
+    let b = String::from("1 2 3 4 5 6");
+    let c = vec![1, 2, 4, 5];
+
+    println!("{:?}", nbr_function(a));
+    println!("{:?}", str_function(b));
+    println!("{:?}", vec_function(c));
+
+    println!("\x1b[1;32mEnd of copy.rs\x1b[0m\n");
 }

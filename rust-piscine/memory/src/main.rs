@@ -9,6 +9,8 @@ mod string_literals;
 use string_literals::*;
 mod name_initials;
 use name_initials::*;
+mod ownership;
+use ownership::*;
 
 fn main() {
     // borrow.rs
@@ -70,4 +72,17 @@ fn main() {
     let names = vec!["Harry Potter", "Someone Else", "J. L.", "Barack Obama"];
     println!("{:?}", initials(names));
     println!("\x1b[1;32mEnd of name_initials.rs\x1b[0m\n");
+
+    // ownership.rs
+    println!("\x1b[1;31mownership.rs\x1b[0m");
+    let s1 = String::from("helloWorld");
+    let s2 = String::from("snake_case");
+    let s3 = String::from("camelCase");
+    let s4 = String::from("just");
+
+    println!("first_subword({}) = {}", s1.clone(), first_subword(s1));
+    println!("first subword({}) = {}", s2.clone(), first_subword(s2));
+    println!("first_subword({}) = {}", s3.clone(), first_subword(s3));
+    println!("first_subword({}) = {}", s4.clone(), first_subword(s4));
+    println!("\x1b[1;31mEnd of ownership.rs\x1b[0m\n");
 }

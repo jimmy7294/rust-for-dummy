@@ -40,13 +40,15 @@ mod tests {
     }
 
     use crate::name_initials::*;
-    // Define Test struc
-    struct Test {
-        names: Vec<&'static str>,
-        result: Vec<&'static str>,
-    }
-    #[test]
+
+    #[test] // this is called an attribute
     fn test_name_initials() {
+        // Define Test struc
+        struct Test {
+            // here we define a struct named Test that has 2 fields, both of them are vectors of string literals
+            names: Vec<&'static str>,
+            result: Vec<&'static str>,
+        }
         let cases = vec![
             Test {
                 names: vec![
@@ -75,6 +77,37 @@ mod tests {
         ];
         for case in cases {
             assert_eq!(initials(case.names), case.result);
+        }
+    }
+
+    use crate::ownership::*;
+    #[test]
+    fn test_owership() {
+        struct Test<'a> {
+            s: String,
+            result: &'a str,
+        }
+        let cases = vec![
+            Test {
+                s: "helloFromTheOtherSide".to_string(),
+                result: "hello",
+            },
+            Test {
+                s: "how_you_doin".to_string(),
+                result: "how",
+            },
+            Test {
+                s: "Winteriscoming".to_string(),
+                result: "Winteriscoming",
+            },
+            Test {
+                s: "TheimpedimentOfActionAdvancesAction".to_string(),
+                result: "Theimpediment",
+            },
+        ];
+
+        for case in cases {
+            assert_eq!(first_subword(case.s), case.result.to_string());
         }
     }
 }

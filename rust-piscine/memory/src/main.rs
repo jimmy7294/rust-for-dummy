@@ -13,6 +13,8 @@ mod ownership;
 use ownership::*;
 mod copy;
 use copy::*;
+mod borrow_me_the_reference;
+use borrow_me_the_reference::*;
 
 fn main() {
     // borrow.rs
@@ -99,4 +101,22 @@ fn main() {
     println!("{:?}", vec_function(c));
 
     println!("\x1b[1;32mEnd of copy.rs\x1b[0m\n");
+
+    // borrow_me_the_reference.rs
+    println!("\x1b[1;33mborrow_me_the_reference.rs\x1b[0m");
+    let mut a = String::from("bpp--o+er+++sskroi-++lcw");
+    let mut b: Vec<String> = vec![
+        "2+2".to_string(),
+        "3+2".to_string(),
+        "10-3".to_string(),
+        "5+5".to_string(),
+    ];
+    let mut c = String::from("++ppstring");
+
+    delete_and_backspace(&mut a);
+    delete_and_backspace(&mut c);
+    println!("c should be string: {:?}", c);
+    do_operations(&mut b);
+    println!("{:?}", (a, b));
+    println!("\x1b[1;33mEnd of borrow_me_the_reference.rs\x1b[0m\n");
 }

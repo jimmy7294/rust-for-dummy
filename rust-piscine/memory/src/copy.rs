@@ -62,3 +62,61 @@ pub fn vec_function(v: Vec<i32>) -> (Vec<i32>, Vec<f64>) {
     let exp = v.iter().map(|n| (*n as f64).abs().ln()).collect();
     (ori, exp)
 }
+
+// another version of str_function as I am not pleased with the first
+// input: ["1 2 3 4 5"] -> [1 2 3 4 5]
+// from the input string, it will be a string of integers numbers separated by a space, we will parse the string into a vector of i32
+// then we will calculate the exponential function of each value and return a tuple with the original value and the exponential function value as a string
+
+#[allow(dead_code)]
+pub fn str_function_v2(s: String) -> (String, String) {
+    let numbers = s
+        .split_whitespace()
+        .map(|n| n.parse::<i32>().unwrap())
+        .collect::<Vec<i32>>();
+
+    let exp = numbers
+        .iter()
+        .map(|n| (*n as f64).exp())
+        .collect::<Vec<f64>>();
+
+    let mut original = String::new();
+    let mut exp_str = String::new();
+    for n in numbers {
+        original.push_str(&n.to_string());
+        original.push(' ');
+    }
+    for n in exp {
+        exp_str.push_str(&n.to_string());
+        exp_str.push(' ');
+    }
+    (original.trim().to_string(), exp_str.trim().to_string())
+}
+
+// str_function v3
+#[allow(dead_code)]
+pub fn str_function_v3(s: String) -> (String, String) {
+    let numbers = s
+        .split_whitespace()
+        .map(|n| n.parse::<i32>().unwrap())
+        .collect::<Vec<i32>>();
+
+    let exp = numbers
+        .iter()
+        .map(|n| (*n as f64).exp())
+        .collect::<Vec<f64>>();
+
+    let original = numbers
+        .iter()
+        .map(|n| n.to_string())
+        .collect::<Vec<String>>()
+        .join(" ");
+
+    let exp_str = exp
+        .iter()
+        .map(|n| n.to_string())
+        .collect::<Vec<String>>()
+        .join(" ");
+
+    (original, exp_str)
+}

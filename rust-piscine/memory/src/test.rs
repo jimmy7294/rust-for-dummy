@@ -204,4 +204,112 @@ mod tests {
             assert_eq!(vec_function(vec_case.v), vec_case.res);
         }
     }
+    #[test]
+    fn test_copy_str_function_v2() {
+        struct TestStr {
+            s: String,
+            res: (String, String),
+        }
+
+        let str_cases = vec![
+                TestStr {
+                    s: "1 2 3 4 5".to_string(),
+                    res: ("1 2 3 4 5".to_string(), "2.718281828459045 7.38905609893065 20.085536923187668 54.598150033144236 148.4131591025766".to_string()),
+                },
+                TestStr {
+                    s: "1 0 4".to_string(),
+                    res: ("1 0 4".to_string(), "2.718281828459045 1 54.598150033144236".to_string()),
+                },
+            ];
+
+        for str_case in str_cases {
+            assert_eq!(str_function_v2(str_case.s), str_case.res);
+        }
+    }
+    #[test]
+    fn test_copy_str_function_v3() {
+        struct TestStr {
+            s: String,
+            res: (String, String),
+        }
+
+        fn create_test_case(s: String, res: (String, String)) -> TestStr {
+            TestStr { s, res }
+        }
+
+        let str_cases = vec![
+            create_test_case("1 2 3 4 5".to_string(), ("1 2 3 4 5".to_string(),"2.718281828459045 7.38905609893065 20.085536923187668 54.598150033144236 148.4131591025766".to_string())),
+            create_test_case("1 0 4".to_string(), ("1 0 4".to_string(), "2.718281828459045 1 54.598150033144236".to_string() )),
+        ];
+
+        for case in str_cases {
+            assert_eq!(str_function_v3(case.s), case.res);
+        }
+    }
+
+    // borrow_me_the_reference.rs
+    use crate::borrow_me_the_reference::*;
+    #[test]
+    fn test_borrow_delete_and_backspace() {
+        struct Test {
+            s: String,
+            res: String,
+        }
+
+        let cases = vec![
+            Test {
+                s: String::from("bpp--o+er+++sskroi-++lcw"),
+                res: String::from("borrow"),
+            },
+            Test {
+                s: String::from("hs-+deasdasd------l+++dsdp"),
+                res: String::from("help"),
+            },
+            Test {
+                s: String::from("pad-rtic+eulqw--+rar"),
+                res: String::from("particular"),
+            },
+            Test {
+                s: String::from("--++++"),
+                res: String::from(""),
+            },
+        ];
+
+        for case in cases {
+            let mut s = case.s.clone();
+            delete_and_backspace(&mut s);
+            assert_eq!(s, case.res);
+        }
+    }
+
+    #[test]
+    fn test_borrow_do_operations() {
+        struct Test {
+            s: Vec<String>,
+            res: Vec<String>,
+        }
+
+        let cases = vec![Test {
+            s: vec![
+                "2+33".to_string(),
+                "3+22".to_string(),
+                "10-44".to_string(),
+                "5+55".to_string(),
+                "0+00".to_string(),
+            ],
+            res: vec![
+                "35".to_string(),
+                "25".to_string(),
+                "-34".to_string(),
+                "60".to_string(),
+                "0".to_string(),
+            ],
+        }];
+
+        for case in cases {
+            let mut s = case.s.clone();
+            do_operations(&mut s);
+            assert_eq!(s, case.res);
+        }
+    }
 }

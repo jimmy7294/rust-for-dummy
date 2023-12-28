@@ -15,7 +15,8 @@ mod copy;
 use copy::*;
 mod borrow_me_the_reference;
 use borrow_me_the_reference::*;
-
+mod tic_tac_toe;
+use tic_tac_toe::*;
 fn main() {
     // borrow.rs
     println!("\x1b[1;34mborrow.rs\x1b[0m");
@@ -119,4 +120,33 @@ fn main() {
     do_operations(&mut b);
     println!("{:?}", (a, b));
     println!("\x1b[1;33mEnd of borrow_me_the_reference.rs\x1b[0m\n");
+
+    // tic_tac_toe.rs
+    println!("\x1b[1;34mtic_tac_toe.rs\x1b[0m");
+    println!(
+        "{:?}",
+        tic_tac_toe(vec![
+            vec!["O", "X", "O"],
+            vec!["O", "O", "X"],
+            vec!["X", "#", "X"]
+        ])
+    );
+
+    println!(
+        "{:?}",
+        tic_tac_toe(vec![
+            vec!["X", "O", "O"],
+            vec!["X", "O", "O"],
+            vec!["#", "O", "X"]
+        ])
+    );
+
+    let dig = vec![
+        vec!["O", "O", "X"],
+        vec!["O", "X", "O"],
+        vec!["X", "#", "X"],
+    ];
+
+    println!("{:?}", tic_tac_toe(dig));
+    println!("\x1b[1;34mEnd of tic_tac_toe.rs\x1b[0m\n");
 }

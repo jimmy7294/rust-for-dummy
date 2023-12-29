@@ -17,6 +17,8 @@ mod borrow_me_the_reference;
 use borrow_me_the_reference::*;
 mod tic_tac_toe;
 use tic_tac_toe::*;
+mod arrange_it;
+use arrange_it::*;
 fn main() {
     // borrow.rs
     println!("\x1b[1;34mborrow.rs\x1b[0m");
@@ -149,4 +151,10 @@ fn main() {
 
     println!("{:?}", tic_tac_toe(dig));
     println!("\x1b[1;34mEnd of tic_tac_toe.rs\x1b[0m\n");
+
+    // arrange_it.rs
+    println!("\x1b[1;35marrange_it.rs\x1b[0m");
+    println!("{:?}", arrange_phrase("is2 Thi1s T4est 3a"));
+    println!("{:?}", arrange_phrase("4of Fo1r pe6ople g3ood th5e the2"));
+    println!("\x1b[1;35mEnd of arrange_it.rs\x1b[0m\n");
 }

@@ -530,4 +530,27 @@ mod tests {
             assert_eq!(tic_tac_toe(v.table), v.result.to_string());
         }
     }
+
+    // arrange_it.rs
+    use crate::arrange_it::*;
+    #[test]
+    fn test_arrange_phrase() {
+        struct Test<'a> {
+            phrase: &'a str,
+            result: &'a str,
+        }
+
+        let cases = vec![Test {
+            phrase: "is2 Thi1s T4est 3a",
+            result: "This is a Test",
+        },
+        Test {
+            phrase: "My1 formula2 for3 greatness4 in5 a6 human7 being8 is9 that10 one11 wants12 nothing14 be15 diff16erent, no17t forwa18rd, no19t backw20ard, no21t i22n a23ll eterni24ty.",
+            result: "My formula for greatness in a human being is that one wants nothing be different, not forward, not backward, not in all eternity.",
+        }];
+
+        for case in cases {
+            assert_eq!(arrange_phrase(case.phrase), case.result.to_string())
+        }
+    }
 }
